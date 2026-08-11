@@ -91,16 +91,16 @@
 
 这个思路解决采样偏移的关键在于：
 
-1. **把“是否被测”从类别证据降级为测量设计**  
+1. **把“是否被测”从类别证据降级为测量设计**
    某个变量被测不再直接支持类别，它只提供一行 measurement equation；如果该行高杠杆、低覆盖或与训练中心特有协议相关，它会影响重建不确定性和残差，而不是直接进入 logits。
 
-2. **把跨中心差异变成可解释的设计矩阵偏移**  
+2. **把跨中心差异变成可解释的设计矩阵偏移**
    PULSE 中的跨中心差异可表示为 `A_center` 的行覆盖、条件数、leverage 分布和变量/时间 query coverage 差异。模型可以报告“这个中心缺少哪些临床射线角度”，而不是只报告 AUROC 退化。
 
-3. **保留 TCF 的病理语义，但不预测医院未来会记录什么**  
+3. **保留 TCF 的病理语义，但不预测医院未来会记录什么**
    DKCT 使用 TCF 的 pathology-focused bins 作为投影观测值 `b_i`，并用 future-time pathology query 作为未观测虚拟射线；但它预测的是重建状态场在未来临床时间的 pathology response，而不是预测 observation administration。
 
-4. **与采样解耦/反事实干预框架低侵入兼容**  
+4. **与采样解耦/反事实干预框架低侵入兼容**
    value process 产生病理射线响应；sampling process 产生观测设计矩阵与噪声/覆盖描述；counterfactual intervention 改变射线覆盖和角度；classifier 仅读取重建后的 `theta`。
 
 ## 2. Methodology: 具体修改点

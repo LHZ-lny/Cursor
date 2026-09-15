@@ -198,7 +198,7 @@ L_side = SmoothL1(Sidecar(probe_policy_summary_r), target_kappa_r)
 
 ```text
 L_minimal =
-  mean |log gamma'(t)| 
+  mean |log gamma'(t)|
   + mean |delta log gamma'(t)|
 ```
 
